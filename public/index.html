@@ -1,8 +1,46 @@
 <!DOCTYPE html>
-<head>
-    <title>Boilerplate App</title>
-</head>
-<body>
-    <h1>Boilerplate</h1>
-    <script src='/scripts/bundle.js'></script>
-</body>
+<html>
+    <head>
+        <title>To-do App</title>
+        <link href='/images/favicon.png' rel='icon'>
+        <link href='/styles/styles.css' rel='stylesheet'>
+    </head>
+    <body>
+        <div class="header">
+            <div class="container">
+                <h1 class='header__title'>To-do List</h1>
+                <h2 class='header__subtitle'>What do you need to do?</h2>
+            </div>
+        </div>
+
+        <div class="actions">
+            <div class="actions__container">
+                <input type='text' class='input' placeholder="Search Todos" id="search-todos">
+                <select id='filter-by-category' class='input'>
+                    <option value='all'>All Categories of Todos</option>
+                    <option value='professional'>Professional Todos</option>
+                    <option value='personal'>Personal Todos</option>
+                </select>
+            </div>
+            <div class="actions__container">
+                <label class='checkbox'>
+                    <input type='checkbox' id='hide-completed'>Hide Completed Todos
+                </label>
+            </div>
+        </div>
+        <div class="container">
+            <div id='todo-list'></div>
+            <form id='add-todo'>
+                <input type='text' class='input' placeholder="Enter New Todo Here" name="newTodo">
+                <select name="newCategory" class='input'>
+                        <option value='professional'>Professional Todos</option>
+                        <option value='personal'>Personal Todos</option>
+                </select>
+                <button class='button'>Submit Todo</button>
+            </form>
+        </div>
+        <script src='/scripts/uuidv4.js'></script>
+        <script src='/scripts/todo-app-functions.js'></script>
+        <script src='/scripts/todo-app.js'></script>
+    </body>
+</html>
