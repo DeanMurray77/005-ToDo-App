@@ -16,6 +16,7 @@
     "babel-cli": "^6.26.0",
     "babel-loader": "^8.0.5",
     "live-server": "^1.2.1",
+    "uuid": "^3.3.2",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.2.1"

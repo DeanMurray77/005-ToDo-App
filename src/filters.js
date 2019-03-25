@@ -1,11 +1,24 @@
-// Set up filters default object
+const filters = {
+    searchText: '',
+    hideCompletedTasks: false,
+    categoryDisplay: 'all'
+}
 
-// getFilters
-// Arguments: none
-// Return value: filters object
+const getFilters = () => filters;
 
-// setFilters
-// Arguments: updates object with optional searchText or hideCompleted
-// Return value: none
+const setFilters = (update) => {
+    if (typeof update.searchText === 'string') {
+        filters.searchText = update.searchText;
+    }
 
-// Make sure to set up the exports
+    if (typeof update.hideCompletedTasks === 'boolean') {
+        filters.hideCompletedTasks = update.hideCompletedTasks;
+    }
+
+    if (update.categoryDisplay === 'all' || 
+        update.categoryDisplay === 'professional' || update.categoryDisplay ==='personal') {
+            filters.categoryDisplay = update.categoryDisplay;
+        }
+}
+
+export { getFilters, setFilters };
