@@ -1,13 +1,19 @@
-import { getTodos, toggleTodo, removeTodo } from "./todos";
-import { getFilters } from "./filters";
+// Get todos from Local Storage
+function loadSavedTodos() {
+    let todosJSON = localStorage.getItem('todos');
+
+    if (todosJSON) {
+        return JSON.parse(todosJSON);
+    } else {
+        return [];
+    }
+}
 
 //Display the Todos
-function displayTodos() {
-    let todos = getTodos();
-    let filters = getFilters();
+function displayTodos(todos, filters) {
     const elTodoList = document.querySelector('#todo-list');
 
-    // Initial filter getting rid of completed tasks
+    // Initial filter getting ride of completed tasks
     let filteredTodos = todos.filter(function (todo) {
         if(filters.hideCompletedTasks) {
             return !todo.complete;
@@ -47,6 +53,39 @@ function displayTodos() {
     }
 }
 
+function createSummaryElement(filteredTodos) {
+    let undoneParagraph = document.createElement('h2');
+    undoneParagraph.classList.add('list-title');
+    if(filteredTodos.length === 1) {
+        undoneParagraph.textContent = `You have ${filteredTodos.length} matching task:`;
+    } else {
+        undoneParagraph.textContent = `You have ${filteredTodos.length} matching tasks:`;
+    }
+
+    return undoneParagraph;
+}
+
+function removeTodo(id) {
+    const todoIndex = todos.findIndex(function (todo) {
+        return todo.id === id;
+    })
+
+    if (todoIndex > -1) {
+        todos.splice(todoIndex, 1);
+    }
+}
+
+// Change the complete status on a given todo
+function toggleTodo(id) {
+    const todo = todos.find(function (todo) {
+        return todo.id == id;
+    })
+
+    if (todo) {
+        todo.complete = !todo.complete;
+    }
+}
+
 // Push individual todo onto the DOM
 function createTodoElement(todo) {
     let taskStatus = '';
@@ -70,7 +109,8 @@ function createTodoElement(todo) {
     elContainer.appendChild(elCheckBox);
     elCheckBox.addEventListener('change', function() {
         toggleTodo(todo.id);
-        displayTodos();
+        saveTodos(todos);
+        displayTodos(todos, filters);
     });
 
     // Format & Setup the text block
@@ -87,23 +127,14 @@ function createTodoElement(todo) {
     todoElement.appendChild(elRemoveButton);
     elRemoveButton.addEventListener('click', function() {
         removeTodo(todo.id);
-        displayTodos();
+        saveTodos(todos);
+        displayTodos(todos, filters);
     });
 
     return todoElement;
 }
 
-// Generate summary DOM
-function createSummaryElement(filteredTodos) {
-    let undoneParagraph = document.createElement('h2');
-    undoneParagraph.classList.add('list-title');
-    if(filteredTodos.length === 1) {
-        undoneParagraph.textContent = `You have ${filteredTodos.length} matching task:`;
-    } else {
-        undoneParagraph.textContent = `You have ${filteredTodos.length} matching tasks:`;
-    }
-
-    return undoneParagraph;
+// Save todos to Local Storage
+function saveTodos(todos) {
+    localStorage.setItem('todos', JSON.stringify(todos));
 }
-
-export { displayTodos };

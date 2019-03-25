@@ -1,8 +1,6 @@
-import { getFilters, setFilters } from "./filters";
+import { setFilters } from "./filters";
 import { displayTodos } from "./views";
 import { createTodo } from "./todos";
-
-
 
 // Add necessary imports
 

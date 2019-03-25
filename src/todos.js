@@ -2,16 +2,16 @@ import uuidv4 from 'uuid/v4';
 
 let todos = [];
 
-todos = loadSavedTodos();
+loadSavedTodos();
 
 // Get todos from Local Storage
 function loadSavedTodos() {
     let todosJSON = localStorage.getItem('todos');
 
     if (todosJSON) {
-        return JSON.parse(todosJSON);
+        todos = JSON.parse(todosJSON);
     } else {
-        return [];
+        todos = [];
     }
 }
 
@@ -31,6 +31,7 @@ function removeTodo(id) {
 
     if (todoIndex > -1) {
         todos.splice(todoIndex, 1);
+        saveTodos();
     }
 }
 
@@ -42,6 +43,7 @@ function toggleTodo(id) {
 
     if (todo) {
         todo.complete = !todo.complete;
+        saveTodos();
     }
 }
 
@@ -59,4 +61,4 @@ const createTodo = (todoText) => {
     }
 }
 
-export { createTodo, getTodos, removeTodo, toggleTodo, saveTodos };
+export { createTodo, getTodos, removeTodo, toggleTodo };
