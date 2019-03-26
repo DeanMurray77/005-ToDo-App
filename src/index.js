@@ -2,18 +2,6 @@ import { setFilters } from "./filters";
 import { displayTodos } from "./views";
 import { createTodo } from "./todos";
 
-// Add necessary imports
-
-// Render initial todos
-
-// Set up search text handler
-
-// Set up checkbox handler
-
-// Set up form submission handler
-
-// Bonus: Add a watcher for local storage
-
 displayTodos();
 
 // Filter todo list
