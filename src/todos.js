@@ -61,4 +61,4 @@ const createTodo = (todoText) => {
     }
 }
 
-export { createTodo, getTodos, removeTodo, toggleTodo };
+export { createTodo, getTodos, removeTodo, toggleTodo, loadSavedTodos };

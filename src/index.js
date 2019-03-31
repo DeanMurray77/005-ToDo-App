@@ -1,6 +1,6 @@
 import { setFilters } from "./filters";
 import { displayTodos } from "./views";
-import { createTodo } from "./todos";
+import { createTodo, loadSavedTodos } from "./todos";
 
 displayTodos();
 
@@ -36,4 +36,11 @@ document.querySelector('#filter-by-category').addEventListener('change', functio
     })
     
     displayTodos();
+})
+
+window.addEventListener('storage', (e) => {
+    if(e.key === 'todos') {
+        loadSavedTodos();
+        displayTodos();
+    }
 })
