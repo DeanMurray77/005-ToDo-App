@@ -4,12 +4,12 @@ import { getFilters } from "./filters";
 //Display the Todos
 function displayTodos() {
     let todos = getTodos();
-    let filters = getFilters();
+    const { hideCompletedTasks, searchText, categoryDisplay } = getFilters();
     const elTodoList = document.querySelector('#todo-list');
 
     // Initial filter getting rid of completed tasks
     let filteredTodos = todos.filter(function (todo) {
-        if(filters.hideCompletedTasks) {
+        if(hideCompletedTasks) {
             return !todo.complete;
         } else {
             return true
@@ -18,13 +18,13 @@ function displayTodos() {
 
     // Filter to show just the ones that match the filter input.
     filteredTodos = filteredTodos.filter(function (todo) {
-        return todo.task.toLowerCase().includes(filters.searchText.toLowerCase());
+        return todo.task.toLowerCase().includes(searchText.toLowerCase());
     })
 
     // Optional filter based on categoryDisplay
-    if (filters.categoryDisplay != 'all') {
+    if (categoryDisplay != 'all') {
         filteredTodos = filteredTodos.filter(function (todo) {
-            return todo.category.toLowerCase() === filters.categoryDisplay.toLowerCase();
+            return todo.category.toLowerCase() === categoryDisplay.toLowerCase();
         })
     }
 

@@ -6,18 +6,18 @@ const filters = {
 
 const getFilters = () => filters;
 
-const setFilters = (update) => {
-    if (typeof update.searchText === 'string') {
-        filters.searchText = update.searchText;
+const setFilters = ({ searchText, hideCompletedTasks, categoryDisplay }) => {
+    if (typeof searchText === 'string') {
+        filters.searchText = searchText;
     }
 
-    if (typeof update.hideCompletedTasks === 'boolean') {
-        filters.hideCompletedTasks = update.hideCompletedTasks;
+    if (typeof hideCompletedTasks === 'boolean') {
+        filters.hideCompletedTasks = hideCompletedTasks;
     }
 
-    if (update.categoryDisplay === 'all' || 
-        update.categoryDisplay === 'professional' || update.categoryDisplay ==='personal') {
-            filters.categoryDisplay = update.categoryDisplay;
+    if (categoryDisplay === 'all' || 
+        categoryDisplay === 'professional' || categoryDisplay ==='personal') {
+            filters.categoryDisplay = categoryDisplay;
         }
 }
 
